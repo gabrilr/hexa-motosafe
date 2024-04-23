@@ -5,12 +5,12 @@ export class CreateUserController {
     constructor(readonly createEventSensorUseCase: CreateEventSensorUseCase){}
 
     async run(req: Request, res: Response){
-        const data = req.body.data;
-        console.log(data);
+        const data = req.body;
+        console.log(data.data);
         
         try {
             const sensor = await this.createEventSensorUseCase.run(
-                data
+                data.data
             );
 
             if (sensor) {
@@ -19,7 +19,8 @@ export class CreateUserController {
                     data: {
                         id: sensor?.id,
                         data: sensor?.data,
-                        date: sensor?.date
+                        date: sensor?.date,
+                        hour: sensor?.hour
                     },
                 });
             }

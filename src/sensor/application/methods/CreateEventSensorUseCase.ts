@@ -4,19 +4,21 @@ import { CreateIDServiceHelper } from "../../infrastructure/helpers/CreateIDServ
 import { GetDateHelper } from "../../infrastructure/helpers/GetDateHelper";
 
 export class CreateEventSensorUseCase {
-    constructor( readonly userRepository: SensorRepository, readonly createIDServiceHelper: CreateIDServiceHelper, 
+    constructor( readonly sensorRepository: SensorRepository, readonly createIDServiceHelper: CreateIDServiceHelper, 
         readonly getDateHelper: GetDateHelper ){ }
 
     async run(data: string): Promise<Sensor | null> {
         
         let id = this.createIDServiceHelper.createID();
         const date = await this.getDateHelper.getDate();
+        const hour = await this.getDateHelper.getHour();
         
         try {
-            const eventSensor : any = await this.userRepository.createEventSensor(
+            const eventSensor : any = await this.sensorRepository.createEventSensor(
                 id,
-                data, 
-                date
+                data,
+                date,
+                hour
             );
             return eventSensor;
 

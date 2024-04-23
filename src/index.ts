@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/users", userRouter);
-app.use("/sensor", userRouter);
+app.use("/sensor", sensorRouter);
 app.use("/contacts", contactRouter);
 
 app.listen(port, ()=>{

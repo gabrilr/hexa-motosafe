@@ -1,3 +1,4 @@
 export interface GetDateService{
-    getDate(): string
+    getDate(): string,
+    getHour(): string
 }

@@ -17,7 +17,7 @@ export const createIDServiceHelper = new CreateIDServiceHelper();
 export const createTokenServiceHelper = new CreateTokenServiceHelper();
 
 export const createEventSensorUseCase = new CreateEventSensorUseCase(mySqlDataSensorRepository, createIDServiceHelper, getDateHelper);
-export const getSensorByDateUseCase = new GetSensorByDateUseCase(mySqlDataSensorRepository, createTokenServiceHelper);
+export const getSensorByDateUseCase = new GetSensorByDateUseCase(mySqlDataSensorRepository);
 
 export const createSensorController = new CreateUserController(createEventSensorUseCase);
 export const getSensorByDateController = new GetUserByEmailController(getSensorByDateUseCase);
