@@ -12,7 +12,7 @@ export class CreateContactController {
 
                 data.id_user,
                 data.name,
-                data.cellphone,
+                data.email,
             );
 
             if (user) {
@@ -22,7 +22,7 @@ export class CreateContactController {
                         id: user?.id,
                         id_user: user?.id_user,
                         name: user?.name,
-                        cellphone: user?.cellphone
+                        email: user?.email
                     },
                 });
             }

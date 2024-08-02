@@ -3,6 +3,6 @@ export class Contact {
         readonly id: string,
         readonly id_user: string,
         readonly name: string,
-        readonly cellphone: string
+        readonly email: string
     ){}
 }

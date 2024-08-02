@@ -5,7 +5,7 @@ export interface ContactRepository{
         id: string, 
         id_user: string,
         name: string,
-        cellphone: string,
+        email: string,
     ): Promise<Contact | null>;
     
     getContactsByIDUser(

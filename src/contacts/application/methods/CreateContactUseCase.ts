@@ -5,7 +5,7 @@ import { CreateIDServiceHelper } from "../../infrastructure/helpers/CreateIDServ
 export class CreateContactUseCase {
     constructor(readonly contactRepository: ContactRepository, readonly createIDServiceHelper: CreateIDServiceHelper ){ }
 
-    async run( id_user: string, name: string, cellphone: string): Promise<Contact | null> {
+    async run( id_user: string, name: string, email: string): Promise<Contact | null> {
         
         let id = this.createIDServiceHelper.createID();
         try {
@@ -13,7 +13,7 @@ export class CreateContactUseCase {
                 id,
                 id_user,
                 name,
-                cellphone,
+                email,
             );
             return user;
             

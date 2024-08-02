@@ -28,5 +28,7 @@ app.use("/sensor", sensorRouter);
 app.use("/contacts", contactRouter);
 
 app.listen(port, ()=>{
+    console.log('Puerto usado: ' + port);
+    
     signale.success("Server running in port: "+port);
 });

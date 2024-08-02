@@ -4,14 +4,14 @@ import { ContactRepository } from "../../domain/interface/ContactRepository";
 
 export class MySqlContactRepository implements ContactRepository {
     
-    async createContact( id: string, id_user: string, name: string, cellphone: string ): Promise<Contact | null> {
+    async createContact( id: string, id_user: string, name: string, email: string ): Promise<Contact | null> {
 
-        const sql = "INSERT INTO contacts (id, id_user, name, cellphone) VALUES (?, ?, ?, ?)";
-        const params: any[] = [id, id_user, name, cellphone];
+        const sql = "INSERT INTO contacts (id, id_user, name, email) VALUES (?, ?, ?, ?)";
+        const params: any[] = [id, id_user, name, email];
 
         try {
             const [result]: any = await query(sql, params);
-            return new Contact(id, id_user, name, cellphone);
+            return new Contact(id, id_user, name, email);
         } catch (error) {
             console.log(error);
             return null;
@@ -31,7 +31,7 @@ export class MySqlContactRepository implements ContactRepository {
                     item.id,
                     item.id_user,
                     item.name,
-                    item.cellphone
+                    item.email
                 );
             });
             console.log(contactsArray);
