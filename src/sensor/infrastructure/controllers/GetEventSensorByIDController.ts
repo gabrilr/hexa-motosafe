@@ -1,14 +1,13 @@
 import { Request, Response } from "express";
-import { GetSensorByDateUseCase } from "../../application/methods/GetSensorByDateUseCase";
+import { GetEventSensorByIDUseCase } from "../../application/methods/GetSensorByIDUseCase";
 
-export class GetUserByEmailController {
-    constructor(readonly getSensorByDateUseCase: GetSensorByDateUseCase){}
+export class GetEventSensorByIDController {
+    constructor(readonly getEventSensorByIDUseCase: GetEventSensorByIDUseCase){}
 
     async run(req: Request, res: Response){
+        const id_user = req.params.id;
         
-        const date = req.body;
-
-        if (!date) {
+        if (!id_user) {
             return res.status(400).send({
                 status: "error",
                 message: "email o contraseña estan incorrectos",
@@ -16,19 +15,22 @@ export class GetUserByEmailController {
         }
 
         try {
-            const eventSensor = await this.getSensorByDateUseCase.run(
-                date
+            const eventSensor = await this.getEventSensorByIDUseCase.run(
+                id_user
             );
             
             if (eventSensor) {
                 res.status(200).send({
                     status: "success",
-                    data: eventSensor.map((contact: any) => {
+                    data: eventSensor.map((sensor: any) => {
                         return{
-                            id: contact.id,
-                            id_user: contact.id_user,
-                            name: contact.name,
-                            cellphone: contact.cellphone
+                            id: sensor.id,
+                            id_user: sensor.id_user,
+                            event: sensor.event,
+                            lat: sensor.lat,
+                            lng: sensor.lng,
+                            spd: sensor.spd,
+                            datetime: sensor.date
                         }
                     })
                 });

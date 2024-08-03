@@ -1,24 +1,20 @@
 import { Sensor } from "../../domain/entity/Sensor";
 import { SensorRepository } from "../../domain/interface/SensorRepository";
 import { CreateIDServiceHelper } from "../../infrastructure/helpers/CreateIDServiceHelper";
-import { GetDateHelper } from "../../infrastructure/helpers/GetDateHelper";
+import { SendNotificationEmailHelper } from "../../infrastructure/helpers/SendNotificationEmailHelper";
 
 export class CreateEventSensorUseCase {
-    constructor( readonly sensorRepository: SensorRepository, readonly createIDServiceHelper: CreateIDServiceHelper, 
-        readonly getDateHelper: GetDateHelper ){ }
+    constructor( readonly sensorRepository: SensorRepository, readonly createIDServiceHelper: CreateIDServiceHelper, readonly SendNotificationEmailHelper){ }
 
-    async run(data: string): Promise<Sensor | null> {
+    async run(id_user:string, event: string, x: string, y: string,
+        dist: string, lat: string, lng: string, spd: string, datetime: string): Promise<Sensor | null> {
         
         let id = this.createIDServiceHelper.createID();
-        const date = await this.getDateHelper.getDate();
-        const hour = await this.getDateHelper.getHour();
         
         try {
             const eventSensor : any = await this.sensorRepository.createEventSensor(
-                id,
-                data,
-                date,
-                hour
+                id, id_user, event, x, y,
+                dist, lat, lng, spd, datetime
             );
             return eventSensor;
 

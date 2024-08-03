@@ -21,6 +21,7 @@
     "moment": "^2.30.1",
     "morgan": "^1.10.0",
     "mysql2": "^3.9.2",
+    "nodemailer": "^6.9.14",
     "signale": "^1.4.0",
     "socket.io-client": "^4.7.5",
     "uuid": "^9.0.1"

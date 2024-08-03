@@ -1,8 +1,8 @@
 import express from "express";
-import { createSensorController } from "../dependency/DependenciesSensor";
-import { getSensorByDateController } from "../dependency/DependenciesSensor";
+import { createEventSensorController } from "../dependency/DependenciesSensor";
+import { getEventSensorByIDController } from "../dependency/DependenciesSensor";
 
 export const sensorRouter = express.Router();
 
-sensorRouter.post("/", createSensorController.run.bind(createSensorController));
-sensorRouter.post("/:date", getSensorByDateController.run.bind(getSensorByDateController));
+sensorRouter.post("/", createEventSensorController.run.bind(createEventSensorController));
+sensorRouter.post("/:id", getEventSensorByIDController.run.bind(getEventSensorByIDController));

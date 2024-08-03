@@ -2,13 +2,13 @@
 import { Sensor } from "../../domain/entity/Sensor";
 import { SensorRepository } from "../../domain/interface/SensorRepository";
 
-export class GetSensorByDateUseCase {
-    constructor(readonly sensorRepository: SensorRepository
-    ){}
+export class GetEventSensorByIDUseCase {
+    constructor(readonly sensorRepository: SensorRepository){}
 
-    async run( date: string ): Promise<Sensor[] | null> {
+    async run( id_user: string ): Promise<Sensor[] | null> {
+        
         try {
-            const result = await this.sensorRepository.getAllEventsSensorByDate(date);
+            const result = await this.sensorRepository.getAllEventsSensor(id_user);
             return result;
 
         } catch (error) {

@@ -4,14 +4,22 @@ import { SensorRepository } from "../../domain/interface/SensorRepository";
 
 export class MySqlDataSensorRepository implements SensorRepository {
     
-    async createEventSensor( id:string , data: string, date: string, hour: string ): Promise<Sensor | null> {
-
-        const sql = "INSERT INTO eventsensor (id, data, date, hour) VALUES (?, ?, ?, ?)";
-        const params: any[] = [id, data, date, hour];
-
+    async createEventSensor( id:string, id_user:string, event: string, x: string, y: string,
+        dist: string, lat: string, lng: string, spd: string, date: string ): Promise<Sensor | null> {
+        
+        //{"event": "caida_parado", "x": -68.36, "y": 0.60, "dist": 75.57, "lat": 16.75, "lng": -93.05, "spd": 2}
+        const sql = "INSERT INTO eventsensor (id, id_user, event, x, y, dist, lat, lng, spd, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        const params: any[] = [id, id_user, event, x, y, dist, lat, lng, spd, date];
+        
+        //params.map(param => console.log("-"+param));
         try {
             const [result]: any = await query(sql, params);
-            return new Sensor(id, data, date, hour);
+            if (result) {
+                
+                return new Sensor(id, id_user, event, x, y, dist, lat, lng, spd, date);
+            }
+            return null;
 
         } catch (error) {
             console.log(error);
@@ -19,11 +27,10 @@ export class MySqlDataSensorRepository implements SensorRepository {
         }
     }
 
-    async getAllEventsSensorByDate(
-        date: string
-    ): Promise<Sensor[] | null> {
-        const sql = "SELECT id, data, date, hour FROM eventsensor WHERE date = ?";
-        const params: any[] = [date];
+    async getAllEventsSensor( id_user: string ): Promise<Sensor[] | null> {
+        
+        const sql = "SELECT id, event, lat, lng, spd, date FROM eventsensor WHERE id_user = ?";
+        const params: any[] = [id_user];
         
         try {
             const [result]: any = await query(sql, params);
